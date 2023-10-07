@@ -7,7 +7,7 @@ export function Resultado({ item }) {
     return (
         <Card style={styles.container}>
             <Card.Content>
-                <DataTable.Row><Text styles={styles.label} >Registro #{item.id}</Text></DataTable.Row>
+                <DataTable.Row><Text styles={styles.label} >Registro #</Text></DataTable.Row>
                 <DataTable.Row>
                     <DataTable.Cell> <Text style={styles.label}>Carnet:</Text></DataTable.Cell>
                     <DataTable.Cell><Text style={styles.texto}>{item.carnet}</Text></DataTable.Cell>

@@ -37,7 +37,7 @@ export default function App() {
   return (
     <>
       <StatusBar style="auto" />
-      <SafeAreaView style={styles.encabezado}>
+      
         <View style={styles.background}/>
           <Text variant='headlineLarge' style={styles.titulo}>Notas Estudiantes</Text>
         <Formulario
@@ -45,7 +45,7 @@ export default function App() {
           setAlumnos={setAlumnos}
           guardarAlumnosStorage={guardarAlumnosStorage}
         />
-      </SafeAreaView>
+      
       <FlatList
         data={alumnos}
         renderItem={({ item }) => <Resultado item={item} />}
