@@ -1,0 +1,6 @@
+export default {
+    COLOR_PRIMARIO: '#186F65',
+    COLOR_SECUNDARIO: '#B5CB99',
+    TEXTO_COLOR: '#FCE09B',
+    FONDO_COLOR: '#D7E5CA'
+}
