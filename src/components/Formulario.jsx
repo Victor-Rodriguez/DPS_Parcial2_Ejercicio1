@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Alert, StyleSheet, View } from 'react-native'
 import { TextInput, Button } from "react-native-paper";
 import shortid from "react-id-generator";
+import colors from '../utils/colors';
 
 export function Formulario({ alumnos, setAlumnos, guardarAlumnosStorage }) {
     //Variables a utilizar
@@ -12,20 +13,36 @@ export function Formulario({ alumnos, setAlumnos, guardarAlumnosStorage }) {
     const [nota2, setNota2] = useState(0)
     const [nota3, setNota3] = useState(0)
     const [promedio, setPromedio] = useState(0)
+    const [aprobado, setAprobado] = useState('Reprobado')
+
+    useEffect(() => {
+        calcularPromedio()
+    }, [nota1, nota2, nota3])
+    
+
+    const calcularPromedio = () => {
+        //Calculando el Promedio
+        const totalPromedio = (parseFloat(nota1) + parseFloat(nota2) + parseFloat(nota3)) / 3
+        if (totalPromedio > 6 ) {
+            setAprobado('Aprobado')
+        }
+        setPromedio(totalPromedio.toFixed(2))
+    }
 
     const registrarAlumnos = () => {
-        
         if (carnet === '' || nombres === '' || apellidos === '' || nota1 === '' || nota2 === '' || nota3 === '') {
             mostrarMensaje()
             return
         }
-        //Calculando el Promedio
-        var calculoPromedio = (nota1 + nota2 + nota3) / 3
-        var total = calculoPromedio.toFixed(2)
-        setPromedio(total)
+        calcularPromedio();
+
+        console.log(nota1);
+        console.log(nota2);
+        console.log(nota3);
+        console.log(promedio);
 
         //Creando Objeto Alumno
-        const alumno = { carnet, nombres, apellidos, nota1, nota2, nota3, promedio }
+        const alumno = { carnet, nombres, apellidos, nota1, nota2, nota3, promedio, aprobado }
         alumno.id = shortid();
 
         //Agregando al state
@@ -72,10 +89,9 @@ export function Formulario({ alumnos, setAlumnos, guardarAlumnosStorage }) {
                 <TextInput style={styles.textInput} mode='outlined' placeholder='Nota 2' onChangeText={(value) => setNota2(value)} />
                 <TextInput style={styles.textInput} mode='outlined' placeholder='Nota 3' onChangeText={(value) => setNota3(value)} />
             </View>
-            <View>
-                <Button style={{ marginTop: 25 }} mode='contained' onPress={() => { registrarAlumnos() }}>Calcular</Button>
+            <View style={styles.contenedorBoton}>
+                <Button style={styles.boton} mode='contained' onPress={() => { registrarAlumnos() }}>Calcular</Button>
             </View>
-
         </View>
     )
 }
@@ -93,5 +109,15 @@ const styles = StyleSheet.create({
         flex: 2,
         height: 45,
         marginHorizontal: 3
+    },
+    contenedorBoton: {
+        alignItems: 'center'
+    },
+    boton: {
+        marginTop: 20,
+        width: '75%',
+        height: 45,
+        textAlign: 'center',
+        backgroundColor: colors.COLOR_SECUNDARIO
     }
 })

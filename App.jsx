@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, SafeAreaView, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
+import { Button } from "react-native-paper";
 import { Text } from "react-native-paper";
 import { Formulario } from './src/components/Formulario';
 import { Resultado } from './src/components/Resultado';
@@ -24,7 +25,7 @@ export default function App() {
     }
     obtenerDataStorage()
   }, [])
-  
+
   //Almacena a los alumnos en storage
   const guardarAlumnosStorage = async (alumnosJSON) => {
     try {
@@ -37,21 +38,19 @@ export default function App() {
   return (
     <>
       <StatusBar style="auto" />
-      
-        <View style={styles.background}/>
-          <Text variant='headlineLarge' style={styles.titulo}>Notas Estudiantes</Text>
-        <Formulario
-          alumnos={alumnos}
-          setAlumnos={setAlumnos}
-          guardarAlumnosStorage={guardarAlumnosStorage}
-        />
-      
+      <View style={styles.background} />
+      <Text variant='headlineLarge' style={styles.titulo}>Notas Estudiantes</Text>
+      <Formulario
+        alumnos={alumnos}
+        setAlumnos={setAlumnos}
+        guardarAlumnosStorage={guardarAlumnosStorage}
+      />
+
       <FlatList
         data={alumnos}
         renderItem={({ item }) => <Resultado item={item} />}
         keyExtractor={alumno => alumno.id}
       />
-
     </>
   );
 }
@@ -62,7 +61,7 @@ const styles = StyleSheet.create({
   },
   background: {
     backgroundColor: colors.COLOR_PRIMARIO,
-    height: 290,
+    height: 270,
     width: '100%',
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
