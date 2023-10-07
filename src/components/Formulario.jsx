@@ -23,7 +23,7 @@ export function Formulario({ alumnos, setAlumnos, guardarAlumnosStorage }) {
     const calcularPromedio = () => {
         //Calculando el Promedio
         const totalPromedio = (parseFloat(nota1) + parseFloat(nota2) + parseFloat(nota3)) / 3
-        if (totalPromedio > 6 ) {
+        if (totalPromedio >= 6 ) {
             setAprobado('Aprobado')
         }
         setPromedio(totalPromedio.toFixed(2))
