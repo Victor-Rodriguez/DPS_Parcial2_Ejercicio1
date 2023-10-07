@@ -25,6 +25,8 @@ export function Formulario({ alumnos, setAlumnos, guardarAlumnosStorage }) {
         const totalPromedio = (parseFloat(nota1) + parseFloat(nota2) + parseFloat(nota3)) / 3
         if (totalPromedio >= 6 ) {
             setAprobado('Aprobado')
+        }else {
+            setAprobado('Reprobado')
         }
         setPromedio(totalPromedio.toFixed(2))
     }
@@ -40,6 +42,7 @@ export function Formulario({ alumnos, setAlumnos, guardarAlumnosStorage }) {
         console.log(nota2);
         console.log(nota3);
         console.log(promedio);
+        console.log(aprobado);
 
         //Creando Objeto Alumno
         const alumno = { carnet, nombres, apellidos, nota1, nota2, nota3, promedio, aprobado }
